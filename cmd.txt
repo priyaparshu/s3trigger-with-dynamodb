@@ -1,0 +1,32 @@
+aws lambda list-functions 
+
+aws lambda invoke  
+          --invocation-type RequestResponse  
+          --function-name myFirstFunction  
+          --log-type Tail  
+          --payload '{"key1":"Lambda","key2":"is","key3":"awesome!"}'  
+          output.txt
+
+aws logs get-log-events  
+          --log-group-name "/aws/lambda/myFirstFunction"  
+          --log-stream-name
+            "2017/02/07/[$LATEST]1ae6ac9c77384794a3202802c683179a" 
+
+aws logs describe-log-groups  
+--log-group-name-prefix "/aws/lambda/" 
+
+
+aws logs describe-log-streams --log-group-name "/aws/lambda/myFirstFunction" 
+
+aws logs get-log-events --log-group-name  
+"/aws/lambda/myFirstFunction"  
+--log-stream-name "2017/02/07/[$LATEST]1ae6ac9c77384794a3202802c683179a" 
+
+aws lambda create-function  
+--function-name myNewFunction  
+--zip-file fileb://myNewFunction.zip  
+--role arn:aws:iam::001234567890:role/basic-lambda-role  
+--handler index.myHandler  
+--runtime nodejs4.3  
+--memory-size 128  
+--publish  
